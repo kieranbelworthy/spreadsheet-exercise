@@ -45,15 +45,14 @@ function generateTableRows() {
         // Create cells for each column
         for (let j = 0; j < 100; j++) {
             let cell = document.createElement('td');
+            let input = document.createElement('input');
+            input.type = 'text';
             let cellObject = new Cell(i, j + 1);
             grid[i][j + 1] = cellObject;
-            cell.addEventListener('click', function() {
-                let input = prompt('Enter a number:');
-                if (!isNaN(input)) {
-                    cellObject.Value = parseFloat(input);
-                    this.textContent = cellObject.Value;
-                }
+            input.addEventListener('change', function() {
+                cellObject.Value = this.value;
             });
+            cell.appendChild(input);
             row.appendChild(cell);
         }
         table.appendChild(row);
