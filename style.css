@@ -11,7 +11,6 @@
 
 .table-container {
     margin-top: 6%;
-    /* padding: 20px; */
 }
 
 table {
@@ -29,18 +28,49 @@ th, td {
     text-align: center;
 }
 
-#refresh-button {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    background-color: #4CAF50;
-    color: #fff;
+.top-container button {
+    margin: 0 10px;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
+#refresh-button {
+    background-color: #4CAF50;
+    color: #fff;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
+
 #refresh-button:hover {
     background-color: #3e8e41;
+}
+
+#bold-button {
+    background-color: #bbb;
+    color: #000;
+}
+
+#bold-button:hover {
+    background-color: #999;
+}
+
+#italics-button {
+    background-color: #bbb;
+    color: #000;
+}
+
+#italics-button:hover {
+    background-color: #999;
+}
+
+#underline-button {
+    background-color: #bbb;
+    color: #000;
+}
+
+#underline-button:hover {
+    background-color: #999;
 }
