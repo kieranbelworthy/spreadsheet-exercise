@@ -104,29 +104,23 @@ function generateTableRows() {
 function evaluateEquation(equation, grid) {
     if (equation.startsWith('=sum(')) {
         let range = equation.substring(5, equation.length - 1);
-        console.log("range is " + range);
         let parts = range.split(':');
-        console.log("parts is " + parts);
         let coordinates = parts.toString().split(',');
         let startCellId = coordinates[0];
         let endCellId = coordinates[1];
-        console.log("cell id worked whippe?? end cell id is  " + endCellId);
         let startRow = parseInt(startCellId.substring(1));
         let startCol = columnLabelToNumber(startCellId.substring(0, 1));
         let endRow = parseInt(endCellId.substring(1));
         let endCol = columnLabelToNumber(endCellId.substring(0, 1));
         let sum = 0;
-        console.log("start row is " + startRow + " and end row is " + endRow);
         for (let i = startRow; i <= endRow; i++) {
             for (let j = startCol; j <= endCol; j++) {
                 let cellValue = grid[i][j].Value;
                 if (cellValue) {
                     sum += parseFloat(cellValue);
-                    console.log("changing sum and its value adding is " + cellValue);
                 }
             }
         }
-        console.log('sum is ' + sum);
         return sum;
     } else {
         var parts = equation.substring(1).split('+');
