@@ -1,5 +1,10 @@
 let grid = [];
 
+function setupData() {
+    generateTableRows();
+    createButtonListeners();
+}
+
 function generateColumnLabels() {
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     let columnLabels = [];
@@ -46,12 +51,16 @@ function generateTableRows() {
         row.appendChild(rowNumberCell);
 
         // Create cells for each column
+        // TODO: Nested loop could this be improved?
         for (let j = 0; j < 100; j++) {
             let cell = document.createElement('td');
             let input = document.createElement('input');
             input.type = 'text';
             let cellObject = new Cell(i, j + 1);
             grid[i][j + 1] = cellObject;
+
+            // Store the input element in the Cell object
+            cellObject.input = input;
 
             // Add event listeners for each cell
             // Only calculate equations when cell left, or cell left focus
@@ -87,6 +96,7 @@ function generateTableRows() {
             cell.appendChild(input);
             row.appendChild(cell);
         }
+
         table.appendChild(row);
     }
 }
@@ -114,4 +124,25 @@ function columnLabelToNumber(label) {
     return label.charCodeAt(0) - 64;
 }
 
-document.addEventListener('DOMContentLoaded', generateTableRows);
+function createButtonListeners() {
+    const refreshButton = document.getElementById('refresh-button');
+
+    refreshButton.addEventListener('click', function() {
+        refreshCells();
+    });
+}
+
+function refreshCells() {
+    for (let i = 1; i <= 100; i++) {
+        for (let j = 0; j < 100; j++) {
+            let cellObject = grid[i][j + 1];
+            
+            if (cellObject.Equation) {
+                cellObject.Value = evaluateEquation(cellObject.Equation, grid);
+                cellObject.input.value = cellObject.Value;
+            }
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', setupData);

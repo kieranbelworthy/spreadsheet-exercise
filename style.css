@@ -7,3 +7,19 @@ th, td {
     padding: 12px;
     text-align: center;
 }
+
+#refresh-button {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#refresh-button:hover {
+    background-color: #3e8e41;
+}
