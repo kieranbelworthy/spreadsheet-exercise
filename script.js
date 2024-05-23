@@ -152,15 +152,18 @@ function createButtonListeners() {
 
     // Use mousedown for formatting buttons
     // Because using click deactivates the cell
-    boldButton.addEventListener('mousedown', function() {
+    boldButton.addEventListener('mousedown', function(event) {
+        event.preventDefault();
         toggleBold();
     });
 
-    italicsButton.addEventListener('mousedown', function() {
+    italicsButton.addEventListener('mousedown', function(event) {
+        event.preventDefault();
         toggleItalics();
     });
 
-    underlineButton.addEventListener('mousedown', function() {
+    underlineButton.addEventListener('mousedown', function(event) {
+        event.preventDefault();
         toggleUnderline();
     });
 
