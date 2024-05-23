@@ -6,5 +6,7 @@ class Cell {
         this.Equation = null;
         this.input = null;
         this.isBold = false;
+        this.isItalics = false;
+        this.isUnderlined = false;
     }
 }

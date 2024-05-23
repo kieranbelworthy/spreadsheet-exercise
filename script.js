@@ -156,6 +156,14 @@ function createButtonListeners() {
         toggleBold();
     });
 
+    italicsButton.addEventListener('mousedown', function() {
+        toggleItalics();
+    });
+
+    underlineButton.addEventListener('mousedown', function() {
+        toggleUnderline();
+    });
+
     refreshButton.addEventListener('click', function() {
         refreshCells();
     });
@@ -190,20 +198,36 @@ function toggleBold() {
     }
 }
 
-// function toggleItalics() {
-//     for (let i = 1; i <= 100; i++) {
-//         for (let j = 0; j < 100; j++) {
-//             let cellObject = grid[i][j + 1];
-//             if (cellObject.input === document.activeElement) {
-//                 cellObject.isItalics = !cellObject.isItalics;
-//                 if (cellObject.isItalics) {
-//                     cellObject.input.style.fontWeight = 'italics';
-//                 } else {
-//                     cellObject.input.style.fontWeight = 'normal';
-//                 }
-//             }
-//         }
-//     }
-// }
+function toggleItalics() {
+    for (let i = 1; i <= 100; i++) {
+        for (let j = 0; j < 100; j++) {
+            let cellObject = grid[i][j + 1];
+            if (cellObject.input === document.activeElement) {
+                cellObject.isItalics = !cellObject.isItalics;
+                if (cellObject.isItalics) {
+                    cellObject.input.style.fontStyle = 'italic';
+                } else {
+                    cellObject.input.style.fontStyle = 'normal';
+                }
+            }
+        }
+    }
+}
+
+function toggleUnderline() {
+    for (let i = 1; i < 100; i++) {
+        for (let j = 0; j < 100; j++) {
+            let cellObject = grid[i][j + 1];
+            if (cellObject.input === document.activeElement) {
+                cellObject.isUnderlined = !cellObject.isUnderlined;
+                if (cellObject.isUnderlined) {
+                    cellObject.input.style.textDecoration = 'underline';
+                } else {
+                    cellObject.input.style.textDecoration = 'none';
+                }
+            }
+        }
+    }
+}
 
 document.addEventListener('DOMContentLoaded', setupData);
