@@ -123,19 +123,102 @@ function evaluateEquation(equation, grid) {
         }
         return sum;
     } else {
-        var parts = equation.substring(1).split('+');
         var result = 0;
-        for (var part of parts) {
-            var cellId = part.trim();
-            var row = parseInt(cellId.substring(1));
-            var col = columnLabelToNumber(cellId.substring(0, 1));
-            var cellValue = grid[row][col].Value;
-            if (cellValue) {
-                result += parseFloat(cellValue);
-            }
+        if (equation.includes("+")) {
+            result += handleAddition(equation);
+        } else if (equation.includes("-")) {
+            result += handleSubtraction(equation);
+        } else if (equation.includes("*")) {
+            result += handleMultiplication(equation);
+        } else if (equation.includes("/")) {
+            result += handleDivision("/");
         }
+
+        console.log("result is    ...")
+        console.log(result);
+
         return result;
     }
+}
+
+function handleAddition(equation) {
+    var parts = equation.substring(1).split('+');
+    var result = 0;
+    
+    for (var part of parts) {
+        var cellId = part.trim();
+        var row = parseInt(cellId.substring(1));
+        var col = columnLabelToNumber(cellId.substring(0, 1));
+        var cellValue = grid[row][col].Value;
+        if (cellValue) {
+            result += parseFloat(cellValue);
+        }
+    }
+
+    return result;
+}
+
+function handleSubtraction(equation) {
+    var parts = equation.substring(1).split('-');
+    var result = 0;
+
+    if (parts.length > 1) {
+        // Get the first value and add to result
+        var cellId = parts[0].trim();
+        var row = parseInt(cellId.substring(1));
+        var col = columnLabelToNumber(cellId.substring(0, 1));
+        result = parseFloat(grid[row][col].Value) || 0;
+
+        // Subtract the remaining values
+        for (var i = 1; i < parts.length; i++) {
+            cellId = parts[i].trim();
+            row = parseInt(cellId.substring(1));
+            col = columnLabelToNumber(cellId.substring(0, 1));
+            var cellValue = parseFloat(grid[row][col].Value) || 0;
+            result -= cellValue;
+        }
+    }
+
+    return result;
+}
+
+function handleMultiplication(equation) {
+    var parts = equation.substring(1).split('*');
+    var result = 1;
+
+    for (var part of parts) {
+        var cellId = part.trim();
+        var row = parseInt(cellId.substring(1));
+        var col = columnLabelToNumber(cellId.substring(0, 1));
+        var cellValue = parseFloat(grid[row][col].Value) || 0;
+        result *= cellValue;
+    }
+
+    return result;
+}
+
+function handleDivision(equation) {
+    var parts = equation.substring(1).split('/');
+    var result = 0;
+
+    if (parts.length > 1) {
+        // Get the first value and add to result
+        var cellId = parts[0].trim();
+        var row = parseInt(cellId.substring(1));
+        var col = columnLabelToNumber(cellId.substring(0, 1));
+        result = parseFloat(grid[row][col].Value) || 0;
+
+        // Divide the remaining values
+        for (var i = 1; i < parts.length; i++) {
+            cellId = parts[i].trim();
+            row = parseInt(cellId.substring(1));
+            col = columnLabelToNumber(cellId.substring(0, 1));
+            var cellValue = parseFloat(grid[row][col].Value);
+            result /= cellValue;
+        }
+    }
+
+    return result;
 }
 
 function columnLabelToNumber(label) {
