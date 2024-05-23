@@ -4,6 +4,7 @@ class Cell {
         this.Column = column;
         this.Value = null;
         this.Equation = null;
-        this.input = null; // Add this property
+        this.input = null;
+        this.isBold = false;
     }
 }

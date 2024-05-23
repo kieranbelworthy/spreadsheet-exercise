@@ -145,7 +145,16 @@ function columnLabelToNumber(label) {
 }
 
 function createButtonListeners() {
+    const boldButton = document.getElementById('bold-button');
+    const italicsButton = document.getElementById('italics-button');
+    const underlineButton = document.getElementById('underline-button');
     const refreshButton = document.getElementById('refresh-button');
+
+    // Use mousedown for formatting buttons
+    // Because using click deactivates the cell
+    boldButton.addEventListener('mousedown', function() {
+        toggleBold();
+    });
 
     refreshButton.addEventListener('click', function() {
         refreshCells();
@@ -164,5 +173,37 @@ function refreshCells() {
         }
     }
 }
+
+function toggleBold() {
+    for (let i = 1; i <= 100; i++) {
+        for (let j = 0; j < 100; j++) {
+            let cellObject = grid[i][j + 1];
+            if (cellObject.input === document.activeElement) {
+                cellObject.isBold = !cellObject.isBold;
+                if (cellObject.isBold) {
+                    cellObject.input.style.fontWeight = 'bold';
+                } else {
+                    cellObject.input.style.fontWeight = 'normal';
+                }
+            }
+        }
+    }
+}
+
+// function toggleItalics() {
+//     for (let i = 1; i <= 100; i++) {
+//         for (let j = 0; j < 100; j++) {
+//             let cellObject = grid[i][j + 1];
+//             if (cellObject.input === document.activeElement) {
+//                 cellObject.isItalics = !cellObject.isItalics;
+//                 if (cellObject.isItalics) {
+//                     cellObject.input.style.fontWeight = 'italics';
+//                 } else {
+//                     cellObject.input.style.fontWeight = 'normal';
+//                 }
+//             }
+//         }
+//     }
+// }
 
 document.addEventListener('DOMContentLoaded', setupData);
