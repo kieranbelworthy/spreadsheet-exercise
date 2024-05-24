@@ -2,7 +2,14 @@
 A simple spreadsheet web application.
 
 # Future Enhancements
-- support for more functions (multiplication and division)
+- Support Equations with more than 2 values and operations (ie. =A1+B1/C1)
+- Equation editing: when focusing on cell with equation, the user should be able to edit equation
+- Support further operations:
+    - AVERAGE
+    - MIN, MAX
+    - ROUND
+    - SQRT
+    - POWER
 
 # Planning Notes
 

@@ -124,6 +124,7 @@ function evaluateEquation(equation, grid) {
         return sum;
     } else {
         var result = 0;
+
         if (equation.includes("+")) {
             result += handleAddition(equation);
         } else if (equation.includes("-")) {
@@ -131,11 +132,8 @@ function evaluateEquation(equation, grid) {
         } else if (equation.includes("*")) {
             result += handleMultiplication(equation);
         } else if (equation.includes("/")) {
-            result += handleDivision("/");
+            result += handleDivision(equation);
         }
-
-        console.log("result is    ...")
-        console.log(result);
 
         return result;
     }
@@ -184,6 +182,7 @@ function handleSubtraction(equation) {
 
 function handleMultiplication(equation) {
     var parts = equation.substring(1).split('*');
+    
     var result = 1;
 
     for (var part of parts) {
@@ -198,23 +197,28 @@ function handleMultiplication(equation) {
 }
 
 function handleDivision(equation) {
-    var parts = equation.substring(1).split('/');
+    var parts = equation.substring(1).split("/");
     var result = 0;
 
     if (parts.length > 1) {
-        // Get the first value and add to result
+        // Get the first value and set result
         var cellId = parts[0].trim();
         var row = parseInt(cellId.substring(1));
         var col = columnLabelToNumber(cellId.substring(0, 1));
         result = parseFloat(grid[row][col].Value) || 0;
 
-        // Divide the remaining values
+        // Divide by the remaining values
         for (var i = 1; i < parts.length; i++) {
             cellId = parts[i].trim();
             row = parseInt(cellId.substring(1));
             col = columnLabelToNumber(cellId.substring(0, 1));
-            var cellValue = parseFloat(grid[row][col].Value);
-            result /= cellValue;
+            var cellValue = parseFloat(grid[row][col].Value) || 0;
+            // Set result to 0 if any value is 0
+            if (cellValue === 0) {
+                result = 0;
+            } else {
+                result /= cellValue;
+            }
         }
     }
 
