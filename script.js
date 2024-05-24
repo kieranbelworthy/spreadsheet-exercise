@@ -109,6 +109,8 @@ function generateTableRows() {
 }
 
 function evaluateEquation(equation, grid) {
+    equation = equation.toLowerCase();
+
     if (equation.startsWith('=sum(')) {
         let range = equation.substring(5, equation.length - 1);
         let parts = range.split(':');
@@ -129,6 +131,31 @@ function evaluateEquation(equation, grid) {
             }
         }
         return sum;
+    } else if (equation.startsWith('=average(')) {
+        let range = equation.substring(9, equation.length - 1);
+        let parts = range.split(':');
+        let coordinates = parts.toString().split(',');
+        let startCellId = coordinates[0];
+        let endCellId = coordinates[1];
+        let startRow = parseInt(startCellId.substring(1));
+        let startCol = columnLabelToNumber(startCellId.substring(0, 1));
+        let endRow = parseInt(endCellId.substring(1));
+        let endCol = columnLabelToNumber(endCellId.substring(0, 1));
+        let sum = 0;
+        let count = 0;
+        for (let i = startRow; i <= endRow; i++) {
+            for (let j = startCol; j <= endCol; j++) {
+                let cellValue = grid[i][j].Value;
+                if (cellValue) {
+                    sum += parseFloat(cellValue);
+                    count++;
+                }
+            }
+        }
+        if (count === 0) {
+            return 0;  // Avoid division by zero
+        }
+        return sum / count;
     } else {
         var result = 0;
 
@@ -233,6 +260,7 @@ function handleDivision(equation) {
 }
 
 function columnLabelToNumber(label) {
+    label = label.toUpperCase();
     // Convert column label to number
     // ASCII codes for letters start at 65
     return label.charCodeAt(0) - 64;

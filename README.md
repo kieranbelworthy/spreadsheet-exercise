@@ -1,10 +1,14 @@
 # spreadsheet-exercise
 A simple spreadsheet web application.
 
+Supports:
+- Simple operations between 2 cells (+, -, *, /)
+- Sum and average formulas between range of cells
+- Simple text formatting (bold, italics, underline)
+
 # Future Enhancements
 - Support Equations with more than 2 values and operations (ie. =A1+B1/C1)
-- Support further operations:
-    - AVERAGE
+- Support further formulas:
     - MIN, MAX
     - ROUND
     - SQRT
@@ -42,4 +46,3 @@ If the sum is invalid, it will be simply treated as a value entry.
 Step 7:
 Add UI for Bold, Italics and Underline buttons
 Add conditional rules to update the CSS for cell text when a cell is selected and one of the above buttons is pressed
-
