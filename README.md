@@ -7,6 +7,7 @@ Supports:
 - Simple text formatting (bold, italics, underline)
 
 # Future Enhancements
+- Code modularisation!!
 - Support Equations with more than 2 values and operations (ie. =A1+B1/C1)
 - Support further formulas:
     - MIN, MAX
