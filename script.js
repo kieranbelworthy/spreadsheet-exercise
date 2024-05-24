@@ -62,6 +62,13 @@ function generateTableRows() {
             // Store the input element in the Cell object
             cellObject.input = input;
 
+            // If cell selected and it has Equation, make it editable
+            input.addEventListener('mousedown', function() {
+                if (cellObject.Equation) {
+                    this.value = cellObject.Equation;
+                }
+            });
+
             // Add event listeners for each cell
             // Only calculate equations when cell left, or cell left focus
             input.addEventListener('input', function() {
